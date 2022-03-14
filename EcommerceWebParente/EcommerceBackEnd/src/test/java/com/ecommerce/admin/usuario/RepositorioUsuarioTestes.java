@@ -27,10 +27,10 @@ public class RepositorioUsuarioTestes {
 
 	@Test
 	public void testeCriarUsuario() {
-		Cargo cargoAdmin = entityManager.find(Cargo.class, 1);
-		Usuario usuarioBianca = new Usuario("biancasd@email.com", "12345bsd", "Bianca", "2020-28-08", "115550123",
-				"123");
-		usuarioBianca.adicionarCargo(cargoAdmin);
+		Cargo cargoEstoquista = entityManager.find(Cargo.class, 2);
+		Usuario usuarioBianca = new Usuario("bianca@email.com", "12345bsd", "Bianca", "2020-28-08", "115550123",
+				"12345");
+		usuarioBianca.adicionarCargo(cargoEstoquista);
 		Usuario usuarioSalvo = repo.save(usuarioBianca);
 		assertThat(usuarioSalvo.getId()).isGreaterThan(0);
 	}
