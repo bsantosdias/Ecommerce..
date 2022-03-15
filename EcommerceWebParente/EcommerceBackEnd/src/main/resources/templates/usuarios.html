@@ -8,9 +8,13 @@
 <title>Tela inicial - Administrador E-commerce</title>
 
 <link rel="stylesheet" type="text/css"
+<<<<<<< HEAD
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+=======
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+>>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script type="text/javascript"
 	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -75,16 +79,24 @@
 						<td>[[${usuario.id}]]</td>
 						<td>[[${usuario.nome}]]</td>
 						<td>[[${usuario.cargos}]]</td>
+<<<<<<< HEAD
+=======
+						<td>[[${usuario.ativado}]]</td>
+>>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 						<td>[[${usuario.cpf}]]</td>
 						<td>[[${usuario.email}]]</td>
 						<td>[[${usuario.telefone}]]</td>
 						<td>[[${usuario.nascimento}]]</td>
+<<<<<<< HEAD
 						<td><a th:if="${usuario.ativado == true}"
 							class="fa-solid fa-circle-check fa-2x icon-green" href=""></a> <a
 							th:if="${usuario.ativado == false}"
 							class="fa-solid fa-circle-check fa-2x icon-dark" href=""></a></td>
 						<td><a class="fa-solid fa-user-pen fa-2x icon-dark" href=""></a>
 							&nbsp;<a class="fa-solid fa-user-slash fa-2x icon-dark" href=""></a></td>
+=======
+						<td>Editar &nbsp; Excluir</td>
+>>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 					</tr>
 				</tbody>
 			</table>

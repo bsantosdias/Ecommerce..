@@ -51,8 +51,12 @@
 			<h2>Cadastrar novo usuário</h2>
 		</div>
 		<form th:action="@{/usuarios/salvar}" method="post"
+<<<<<<< HEAD
 			style="max-width: 700px; margin: 0 auto" th:object=${usuario}
 			onsubmit="return checarEmailUnico(this);">
+=======
+			style="max-width: 700px; margin: 0 auto" th:object=${usuario}>
+>>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 
 			<div class="border border-secondary rounded p-3">
 				<div class="form-group row m-2 ">
@@ -121,6 +125,7 @@
 				</div>
 			</div>
 		</form>
+<<<<<<< HEAD
 
 		<div class="modal fade text-center" id="modalDialog">
 			<div class="modal-dialog">
@@ -140,6 +145,8 @@
 			</div>
 		</div>
 
+=======
+>>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -147,6 +154,7 @@
 				window.location = "[[@{/usuarios}]]";
 			});
 		});
+<<<<<<< HEAD
 
 		function checarEmailUnico(form) {
 			url = "[[@{/usuarios/checar_email}]]";
@@ -184,6 +192,8 @@
 			$("#modalDialog").modal("show");
 
 		}
+=======
+>>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 	</script>
 </body>
 </html>

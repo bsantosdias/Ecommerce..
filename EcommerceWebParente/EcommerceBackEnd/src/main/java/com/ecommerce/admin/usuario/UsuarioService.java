@@ -39,9 +39,12 @@ public class UsuarioService {
 		String senhaCodificada = codificadorSenha.encode(usuario.getSenha());
 		usuario.setSenha(senhaCodificada);
 	}
+<<<<<<< HEAD
 
 	public boolean emailUnico(String email) {
 		Usuario usuarioPeloEmail = usuarioRepo.getUsuarioPeloEmail(email);
 		return usuarioPeloEmail == null;
 	}
+=======
+>>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 }
