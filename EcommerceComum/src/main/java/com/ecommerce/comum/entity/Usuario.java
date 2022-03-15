@@ -44,6 +44,7 @@ public class Usuario {
 
 	@ManyToMany
 	@JoinTable(name = "usuarios_cargos", joinColumns = @JoinColumn(name = " usuario_id"), inverseJoinColumns = @JoinColumn(name = "cargo_id"))
+	
 	private Set<Cargo> cargos = new HashSet<>();
 
 	public Usuario() {
@@ -54,7 +55,6 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
-
 		this.nascimento = nascimento;
 		this.telefone = telefone;
 		this.cpf = cpf;
