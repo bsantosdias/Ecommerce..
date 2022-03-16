@@ -37,14 +37,14 @@ public class Usuario {
 	@Column(name = "telefone")
 	private String telefone;
 
-	@Column(name = "cpf", nullable = false, unique = true)
+	@Column(name = "cpf", nullable = false)
 	private String cpf;
 
 	private boolean ativado;
 
 	@ManyToMany
 	@JoinTable(name = "usuarios_cargos", joinColumns = @JoinColumn(name = " usuario_id"), inverseJoinColumns = @JoinColumn(name = "cargo_id"))
-	
+
 	private Set<Cargo> cargos = new HashSet<>();
 
 	public Usuario() {
