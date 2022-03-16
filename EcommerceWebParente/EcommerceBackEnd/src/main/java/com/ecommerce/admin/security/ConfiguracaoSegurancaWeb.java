@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class ConfiguracaoSegurancaWeb extends WebSecurityConfigurerAdapter {
 
+	//Encripritografar a senha
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return new EcommerceDetalhesUsuarioService();
@@ -27,6 +28,7 @@ public class ConfiguracaoSegurancaWeb extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+<<<<<<< HEAD
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());
@@ -54,4 +56,17 @@ public class ConfiguracaoSegurancaWeb extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
 	}
 
+=======
+
+	//Autorização de login
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().anyRequest().authenticated()
+		.and()
+		.formLogin()
+		.loginPage("/login")
+		.permitAll();
+
+	}
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 }

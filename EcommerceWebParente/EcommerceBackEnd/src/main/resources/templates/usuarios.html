@@ -17,6 +17,8 @@
 </head>
 <body>
 	<div class="container-fluid">
+
+		<!-- Menu de navegação -->
 		<div>
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 				<a class="navbar-brand" th:href="@{/}"> <img class="m-3"
@@ -49,13 +51,21 @@
 				</div>
 			</nav>
 		</div>
+
+		<!-- Cadastrar usuários -->
 		<div>
 			<h2>Administrar usuários</h2>
+<<<<<<< HEAD
 			<a th:href="@{/usuarios/cadastrar}" class="fa-solid fa-user-plus fa-2x icon-dark m-2" ></a>
+=======
+			<a th:href="@{/usuarios/cadastrar}" class="fa-solid fa-user-plus"
+				fa-2x icon-blue mr-2></a>
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 		</div>
 		<div th:if="${message != null}"
 			class="alert alert-success text-center ">[[${message}]]</div>
 
+<<<<<<< HEAD
 		<div>
 			<form th:action="@{/usuarios/pagina/1}" class="form-inline m-2">
 				Pesquisa:&nbsp; <input type="search" name="keyword"
@@ -89,23 +99,170 @@
 						<!-- <td>[[${usuario.telefone}]]</td> -->
 						<!-- <td>[[${usuario.nascimento}]]</td> -->
 						<td><a th:if="${usuario.ativado == true}"
+=======
+		<!-- Pesquisar -->
+		<div>
+			<form th:action="@{/usuarios/pagina/1}" class="form-inline m-2">
+				Pesquisa:&nbsp; <input type="search" name="keyword"
+					th:value="${keyword}" required /> &nbsp;&nbsp;
+				<button type="submit" value="Procurar" class="btn btn-primary">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
+			</form>
+		</div>
+
+		<!-- Listagem de usuários cadastrados -->
+		<div class="detalhes">
+			<div class="table-responsive col-xs-1 text-center">
+				<table class="table table-bordered table-sriped table-hover">
+					<thead class="table-dark">
+						<tr>
+							<!-- <th>ID Usuário</th> -->
+							<th>Nome</th>
+							<th>Cargo</th>
+							<!-- <th>CPF</th> -->
+							<!-- <th>Email</th>
+						<th>Telefone</th>
+						<th>Nascimento</th> -->
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario : ${listarUsuarios}">
+							<!-- <td>[[${usuario.id}]]</td> -->
+							<td>[[${usuario.nome}]]</td>
+							<td>[[${usuario.cargos}]]</td>
+							<!-- <td>[[${usuario.cpf}]]</td> -->
+							<!-- <td>[[${usuario.email}]]</td> -->
+							<!-- <td>[[${usuario.telefone}]]</td> -->
+							<!-- <td>[[${usuario.nascimento}]]</td> -->
+							<td><a th:if="${usuario.ativado == true}"
+								class="fa-solid fa-circle-check fa-2x icon-green "
+								th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/false'}"
+								title="Desativar usuário"></a> <a
+								th:if="${usuario.ativado == false}"
+								class="fa-solid fa-circle fa-2x icon-dark"
+								th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/true'}"
+								title="Ativar usuário"></a></td>
+
+							<td><a class="fa-solid fa-user-pen fa-2x icon-dark "
+								th:href="@{'/usuarios/editar/' + ${usuario.id}}"
+								title="Editar usuário"> </a>&nbsp;&nbsp; <a
+								class="fa-solid fa-user-slash fa-2x icon-dark link-delete"
+								th:href="@{'/usuarios/deletar/' +${usuario.id}}"
+								th:userId="${usuario.id}" title="Deletar usuário"></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Mostrando o conteúdo para celular -->
+		<div class="ultimos-detalhes">
+			<div th:each="usuario : ${listarUsuarios}" class="row m-2">
+				<div class="col-8">
+					<div>[[${usuario.nome}]]</div>
+				</div>
+				<div class="col-8">
+					<div>
+						<a th:if="${usuario.ativado == true}"
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 							class="fa-solid fa-circle-check fa-2x icon-green "
 							th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/false'}"
 							title="Desativar usuário"></a> <a
 							th:if="${usuario.ativado == false}"
 							class="fa-solid fa-circle fa-2x icon-dark"
 							th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/true'}"
+<<<<<<< HEAD
 							title="Ativar usuário"></a></td>
 
 						<td><a class="fa-solid fa-user-pen fa-2x icon-dark "
+=======
+							title="Ativar usuário"></a>
+					</div>
+				</div>
+				<div class="col-4">
+					<div>[[${usuario.cargos}]]</div>
+					<div>
+						<a class="fa-solid fa-user-pen fa-2x icon-dark "
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 							th:href="@{'/usuarios/editar/' + ${usuario.id}}"
 							title="Editar usuário"> </a>&nbsp;&nbsp; <a
 							class="fa-solid fa-user-slash fa-2x icon-dark link-delete"
 							th:href="@{'/usuarios/deletar/' +${usuario.id}}"
+<<<<<<< HEAD
 							th:userId="${usuario.id}" title="Deletar usuário"></a></td>
 					</tr>
 				</tbody>
 			</table>
+=======
+							th:userId="${usuario.id}" title="Deletar usuário"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="text-center m-1" th:if="${totalItens > 0}">
+			<span>Usuários [[${comecoConta}]] até [[${finalConta}]] de
+				[[${totalItens}]]</span>
+		</div>
+		<div class="text-center m-1" th:unless="${totalItens > 0}">
+			<span>Nenhum usuário encontrado</span>
+		</div>
+
+		<!-- Paginação -->
+		<div th:if="${totalPaginas > 1} " class="flex-wrap">
+			<nav>
+				<ul class="pagination justify-content-center">
+					<li th:class="${paginaAtual > 1 ?'page-item':'page-item disabled'}"><a
+						class="page-link" th:href="@{/usuarios/pagina/1}"
+						aria-label="Primeira"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li th:class="${paginaAtual > 1 ?'page-item':'page-item disabled'}"><a
+						class="page-link"
+						th:href="@{'/usuarios/pagina/'+${paginaAtual -1 }}"
+						aria-label="Anterior"> <span aria-hidden="true">&lt;</span>
+					</a></li>
+					<li
+						th:class="${paginaAtual != i ? 'page-item' : 'page-item active'}"
+						th:each="i : ${#numbers.sequence(1, totalPaginas)}"><a
+						class="page-link" th:href="@{'/usuarios/pagina/' +${i}}">[[${i}]]</a>
+					</li>
+					<li
+						th:class="${paginaAtual < totalPaginas ? 'page-item':'page-item disabled'}"><a
+						class="page-link"
+						th:href="@{'/usuarios/pagina/'+${paginaAtual +1 }}"
+						aria-label="Proxima"> <span aria-hidden="true">&gt;</span>
+					</a></li>
+					<li
+						th:class="${paginaAtual < totalPaginas ? 'page-item':'page-item disabled'}"><a
+						class="page-link" th:href="@{'/usuarios/pagina/'+${totalPaginas}}"
+						aria-label="Ultima"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Modal de confirmação de exclusão -->
+		<div class="modal fade text-center" id="confirmModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="modalTitle">Atenção</h4>
+						<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<span id="modalBody"></span>
+					</div>
+					<div class="modal-footer">
+						<a class="btn btn-success" id="yesButton" href="">Sim</a>
+						<button type="button" class="btn btn-danger"
+							data-bs-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 		</div>
 		<div class="text-center m-1" th:if="${totalItens > 0}">
 			<span>Usuários [[${comecoConta}]] até [[${finalConta}]] de
@@ -164,6 +321,11 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
+=======
+
+	<!-- Função de exclusão -->
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 	<script type="text/javascript">
 		$(document).ready(
 				function() {

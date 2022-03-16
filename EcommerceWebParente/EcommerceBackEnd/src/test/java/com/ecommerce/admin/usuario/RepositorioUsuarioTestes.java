@@ -33,7 +33,11 @@ public class RepositorioUsuarioTestes {
 	@Test
 	public void testeCriarUsuario() {
 		Cargo cargoEstoquista = entityManager.find(Cargo.class, 2);
+<<<<<<< HEAD
 		Usuario usuarioBianca = new Usuario("biancadias1@email.com", "12345bsd", "Bianca", "2020-28-08", "115550123",
+=======
+		Usuario usuarioBianca = new Usuario("biancadias@email.com", "12345bsd", "Bianca", "2020-28-08", "115550123",
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 				"123456");
 		usuarioBianca.adicionarCargo(cargoEstoquista);
 		Usuario usuarioSalvo = repo.save(usuarioBianca);
@@ -102,7 +106,11 @@ public class RepositorioUsuarioTestes {
 
 	@Test
 	public void testeUsuarioAtivo() {
+<<<<<<< HEAD
 		Integer id = 23;
+=======
+		Integer id = 3;
+>>>>>>> b28742be25365492232e55f82f2e960b073e4457
 		repo.atualizarStatusAtivado(id, true);
 	}
 
