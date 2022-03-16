@@ -1,7 +1,42 @@
 *.icon-dark {
-	color: grey
+	color: grey;
 }
 
 *.icon-green {
-	color: green
+	color: green;
+}
+*.icon-blue {
+	color: blue;
+}
+
+/*Configurando telas para celulares*/
+@media screen and (max-width: 768px){
+	div.detalhes {
+		display: none
+	}
+	/*mostrar apenas para celular*/
+	div.ultimos-detalhes{
+		display: block;
+	}
+}
+/*Configurando telas para dispositivos médios(tables) ou monitores pequenos*/
+@media screen and (min-width: 768px) and (max-width: 1024px){
+	div.detalhes {
+		display: block;
+	}
+	div.ultimos-detalhes{
+		display: hidden;
+	}
+	.hideable-column{
+		display: none;
+	}
+}
+/*Configurando telas para computador*/
+@media screen and (min-width: 1024px){
+	div.ultimos-detalhes{
+		display: block;
+	}
+	.hideable-column{
+		display: table-cell;
+	}
 }

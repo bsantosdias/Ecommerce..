@@ -12,15 +12,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class ConfiguracaoSegurancaWeb extends WebSecurityConfigurerAdapter {
 
+	//Encripritografar a senha
 	@Bean
 	public PasswordEncoder PasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+
+	//Autorização de login
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().permitAll();
+		http.authorizeRequests().anyRequest().authenticated()
+		.and()
+		.formLogin()
+		.loginPage("/login")
+		.permitAll();
 
 	}
-
 }

@@ -17,6 +17,8 @@
 </head>
 <body>
 	<div class="container-fluid">
+
+		<!-- Menu de navegação -->
 		<div>
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 				<a class="navbar-brand" th:href="@{/}"> <img
@@ -49,64 +51,106 @@
 				</div>
 			</nav>
 		</div>
+
+		<!-- Cadastrar usuários -->
 		<div>
 			<h2>Administrar usuários</h2>
-			<a th:href="@{/usuarios/cadastrar}">Cadastrar novo usuário</a>
+			<a th:href="@{/usuarios/cadastrar}" class="fa-solid fa-user-plus"
+				fa-2x icon-blue mr-2></a>
 		</div>
 		<div th:if="${message != null}"
 			class="alert alert-success text-center ">[[${message}]]</div>
 
+		<!-- Pesquisar -->
 		<div>
 			<form th:action="@{/usuarios/pagina/1}" class="form-inline m-2">
 				Pesquisa:&nbsp; <input type="search" name="keyword"
-					th:value="${keyword}" required /> &nbsp;&nbsp; <input
-					type="submit" value="Procurar" class="btn btn-primary" />
+					th:value="${keyword}" required /> &nbsp;&nbsp;
+				<button type="submit" value="Procurar" class="btn btn-primary">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
 			</form>
 		</div>
 
-		<div class="table-responsive col-xs-1 text-center">
-			<table class="table table-bordered table-sriped table-hover">
-				<thead class="table-dark">
-					<tr>
-						<!-- <th>ID Usuário</th> -->
-						<th>Nome</th>
-						<th>Cargo</th>
-						<!-- <th>CPF</th> -->
-						<!-- <th>Email</th>
+		<!-- Listagem de usuários cadastrados -->
+		<div class="detalhes">
+			<div class="table-responsive col-xs-1 text-center">
+				<table class="table table-bordered table-sriped table-hover">
+					<thead class="table-dark">
+						<tr>
+							<!-- <th>ID Usuário</th> -->
+							<th>Nome</th>
+							<th>Cargo</th>
+							<!-- <th>CPF</th> -->
+							<!-- <th>Email</th>
 						<th>Telefone</th>
 						<th>Nascimento</th> -->
-						<th>Status</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="usuario : ${listarUsuarios}">
-						<!-- <td>[[${usuario.id}]]</td> -->
-						<td>[[${usuario.nome}]]</td>
-						<td>[[${usuario.cargos}]]</td>
-						<!-- <td>[[${usuario.cpf}]]</td> -->
-						<!-- <td>[[${usuario.email}]]</td> -->
-						<!-- <td>[[${usuario.telefone}]]</td> -->
-						<!-- <td>[[${usuario.nascimento}]]</td> -->
-						<td><a th:if="${usuario.ativado == true}"
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario : ${listarUsuarios}">
+							<!-- <td>[[${usuario.id}]]</td> -->
+							<td>[[${usuario.nome}]]</td>
+							<td>[[${usuario.cargos}]]</td>
+							<!-- <td>[[${usuario.cpf}]]</td> -->
+							<!-- <td>[[${usuario.email}]]</td> -->
+							<!-- <td>[[${usuario.telefone}]]</td> -->
+							<!-- <td>[[${usuario.nascimento}]]</td> -->
+							<td><a th:if="${usuario.ativado == true}"
+								class="fa-solid fa-circle-check fa-2x icon-green "
+								th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/false'}"
+								title="Desativar usuário"></a> <a
+								th:if="${usuario.ativado == false}"
+								class="fa-solid fa-circle fa-2x icon-dark"
+								th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/true'}"
+								title="Ativar usuário"></a></td>
+
+							<td><a class="fa-solid fa-user-pen fa-2x icon-dark "
+								th:href="@{'/usuarios/editar/' + ${usuario.id}}"
+								title="Editar usuário"> </a>&nbsp;&nbsp; <a
+								class="fa-solid fa-user-slash fa-2x icon-dark link-delete"
+								th:href="@{'/usuarios/deletar/' +${usuario.id}}"
+								th:userId="${usuario.id}" title="Deletar usuário"></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Mostrando o conteúdo para celular -->
+		<div class="ultimos-detalhes">
+			<div th:each="usuario : ${listarUsuarios}" class="row m-2">
+				<div class="col-8">
+					<div>[[${usuario.nome}]]</div>
+				</div>
+				<div class="col-8">
+					<div>
+						<a th:if="${usuario.ativado == true}"
 							class="fa-solid fa-circle-check fa-2x icon-green "
 							th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/false'}"
 							title="Desativar usuário"></a> <a
 							th:if="${usuario.ativado == false}"
 							class="fa-solid fa-circle fa-2x icon-dark"
 							th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/true'}"
-							title="Ativar usuário"></a></td>
-
-						<td><a class="fa-solid fa-user-pen fa-2x icon-dark "
+							title="Ativar usuário"></a>
+					</div>
+				</div>
+				<div class="col-4">
+					<div>[[${usuario.cargos}]]</div>
+					<div>
+						<a class="fa-solid fa-user-pen fa-2x icon-dark "
 							th:href="@{'/usuarios/editar/' + ${usuario.id}}"
 							title="Editar usuário"> </a>&nbsp;&nbsp; <a
 							class="fa-solid fa-user-slash fa-2x icon-dark link-delete"
 							th:href="@{'/usuarios/deletar/' +${usuario.id}}"
-							th:userId="${usuario.id}" title="Deletar usuário"></a></td>
-					</tr>
-				</tbody>
-			</table>
+							th:userId="${usuario.id}" title="Deletar usuário"></a>
+					</div>
+				</div>
+			</div>
 		</div>
+
 		<div class="text-center m-1" th:if="${totalItens > 0}">
 			<span>Usuários [[${comecoConta}]] até [[${finalConta}]] de
 				[[${totalItens}]]</span>
@@ -114,7 +158,9 @@
 		<div class="text-center m-1" th:unless="${totalItens > 0}">
 			<span>Nenhum usuário encontrado</span>
 		</div>
-		<div th:if="${totalPaginas > 1}">
+
+		<!-- Paginação -->
+		<div th:if="${totalPaginas > 1} " class="flex-wrap">
 			<nav>
 				<ul class="pagination justify-content-center">
 					<li th:class="${paginaAtual > 1 ?'page-item':'page-item disabled'}"><a
@@ -145,6 +191,8 @@
 				</ul>
 			</nav>
 		</div>
+
+		<!-- Modal de confirmação de exclusão -->
 		<div class="modal fade text-center" id="confirmModal">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -164,6 +212,8 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Função de exclusão -->
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
