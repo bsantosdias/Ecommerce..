@@ -10,5 +10,10 @@ public class MainController {
 	public String verTelaInicial() {
 		return "index";
 	}
+	
+	@GetMapping("/login")
+	public String verTelaLogin() {
+		return "login";
+	}
 
 }

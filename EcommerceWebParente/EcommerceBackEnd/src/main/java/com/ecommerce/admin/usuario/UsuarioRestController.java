@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class UsuarioRestController {
 
@@ -12,8 +13,11 @@ public class UsuarioRestController {
 	private UsuarioService service;
 
 	@PostMapping("/usuarios/checar_email")
-	public String checarEmailDuplicado(@Param("email") String email) {
-		return service.emailUnico(email) ? "OK" : "Duplicado";
-
+	public String checarEmailDuplicado(@Param("email") String email, @Param("id") Integer id) {
+		if (id == null) {
+			return service.emailUnico(email) ? "OK" : "Duplicado";
+		} else {		
+			return "OK";
+		}
 	}
 }

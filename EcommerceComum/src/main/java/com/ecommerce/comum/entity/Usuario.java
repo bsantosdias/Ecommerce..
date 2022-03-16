@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,14 +38,14 @@ public class Usuario {
 	@Column(name = "telefone")
 	private String telefone;
 
-	@Column(name = "cpf", nullable = false, unique = true)
+	@Column(name = "cpf", nullable = false)
 	private String cpf;
 
 	private boolean ativado;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuarios_cargos", joinColumns = @JoinColumn(name = " usuario_id"), inverseJoinColumns = @JoinColumn(name = "cargo_id"))
-	
+
 	private Set<Cargo> cargos = new HashSet<>();
 
 	public Usuario() {

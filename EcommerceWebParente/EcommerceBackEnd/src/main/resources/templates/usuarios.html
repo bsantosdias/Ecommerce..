@@ -8,13 +8,9 @@
 <title>Tela inicial - Administrador E-commerce</title>
 
 <link rel="stylesheet" type="text/css"
-<<<<<<< HEAD
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
-=======
-	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
->>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script type="text/javascript"
 	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -23,8 +19,8 @@
 	<div class="container-fluid">
 		<div>
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-				<a class="navbar-brand" th:href="@{/}"> <img
-					style="max-width: 100px" th:src="@{/images/logo.png}" />
+				<a class="navbar-brand" th:href="@{/}"> <img class="m-3"
+					style="max-width: 80px" th:src="@{/images/logo.png}" />
 				</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#topNavbar">
@@ -32,7 +28,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id=topNavbar>
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item" sec:authorize="hasAuthority('Administrador')"><a class="nav-link"
 							th:href="@{/usuarios}">Usuários</a></li>
 						<!-- <li class="nav-item"><a class="nav-link"
 							th:href="@{/categorias}">Categorias</a></li>
@@ -55,52 +51,138 @@
 		</div>
 		<div>
 			<h2>Administrar usuários</h2>
-			<a th:href="@{/usuarios/cadastrar}">Cadastrar novo usuário</a>
+			<a th:href="@{/usuarios/cadastrar}" class="fa-solid fa-user-plus fa-2x icon-dark m-2" ></a>
 		</div>
 		<div th:if="${message != null}"
-			class="alert alert-success text-center">[[${message}]]</div>
-		<div class="table-responsive ">
+			class="alert alert-success text-center ">[[${message}]]</div>
+
+		<div>
+			<form th:action="@{/usuarios/pagina/1}" class="form-inline m-2">
+				Pesquisa:&nbsp; <input type="search" name="keyword"
+					th:value="${keyword}" required /> &nbsp;&nbsp; <input
+					type="submit" value="Procurar" class="btn btn-primary" />
+			</form>
+		</div>
+
+		<div class=" table-responsive col-xs-1 text-center">
 			<table class="table table-bordered table-sriped table-hover">
 				<thead class="table-dark">
 					<tr>
-						<th>ID Usuário</th>
+						<!-- <th>ID Usuário</th> -->
 						<th>Nome</th>
 						<th>Cargo</th>
-						<th>Status</th>
-						<th>CPF</th>
-						<th>Email</th>
+						<!-- <th>CPF</th> -->
+						<!-- <th>Email</th>
 						<th>Telefone</th>
-						<th>Nascimento</th>
+						<th>Nascimento</th> -->
+						<th>Status</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="usuario : ${listarUsuarios}">
-						<td>[[${usuario.id}]]</td>
+						<!-- <td>[[${usuario.id}]]</td> -->
 						<td>[[${usuario.nome}]]</td>
 						<td>[[${usuario.cargos}]]</td>
-<<<<<<< HEAD
-=======
-						<td>[[${usuario.ativado}]]</td>
->>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
-						<td>[[${usuario.cpf}]]</td>
-						<td>[[${usuario.email}]]</td>
-						<td>[[${usuario.telefone}]]</td>
-						<td>[[${usuario.nascimento}]]</td>
-<<<<<<< HEAD
+						<!-- <td>[[${usuario.cpf}]]</td> -->
+						<!-- <td>[[${usuario.email}]]</td> -->
+						<!-- <td>[[${usuario.telefone}]]</td> -->
+						<!-- <td>[[${usuario.nascimento}]]</td> -->
 						<td><a th:if="${usuario.ativado == true}"
-							class="fa-solid fa-circle-check fa-2x icon-green" href=""></a> <a
+							class="fa-solid fa-circle-check fa-2x icon-green "
+							th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/false'}"
+							title="Desativar usuário"></a> <a
 							th:if="${usuario.ativado == false}"
-							class="fa-solid fa-circle-check fa-2x icon-dark" href=""></a></td>
-						<td><a class="fa-solid fa-user-pen fa-2x icon-dark" href=""></a>
-							&nbsp;<a class="fa-solid fa-user-slash fa-2x icon-dark" href=""></a></td>
-=======
-						<td>Editar &nbsp; Excluir</td>
->>>>>>> 01481872795ceb6b90bf0b4c1b478ff4b77bd237
+							class="fa-solid fa-circle fa-2x icon-dark"
+							th:href="@{'/usuarios/' + ${usuario.id} + '/ativado/true'}"
+							title="Ativar usuário"></a></td>
+
+						<td><a class="fa-solid fa-user-pen fa-2x icon-dark "
+							th:href="@{'/usuarios/editar/' + ${usuario.id}}"
+							title="Editar usuário"> </a>&nbsp;&nbsp; <a
+							class="fa-solid fa-user-slash fa-2x icon-dark link-delete"
+							th:href="@{'/usuarios/deletar/' +${usuario.id}}"
+							th:userId="${usuario.id}" title="Deletar usuário"></a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<div class="text-center m-1" th:if="${totalItens > 0}">
+			<span>Usuários [[${comecoConta}]] até [[${finalConta}]] de
+				[[${totalItens}]]</span>
+		</div>
+		<div class="text-center m-1" th:unless="${totalItens > 0}">
+			<span>Nenhum usuário encontrado</span>
+		</div>
+		<div th:if="${totalPaginas > 1}">
+			<nav>
+				<ul class="pagination justify-content-center">
+					<li th:class="${paginaAtual > 1 ?'page-item':'page-item disabled'}"><a
+						class="page-link" th:href="@{/usuarios/pagina/1}"
+						aria-label="Primeira"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li th:class="${paginaAtual > 1 ?'page-item':'page-item disabled'}"><a
+						class="page-link"
+						th:href="@{'/usuarios/pagina/'+${paginaAtual -1 }}"
+						aria-label="Anterior"> <span aria-hidden="true">&lt;</span>
+					</a></li>
+					<li
+						th:class="${paginaAtual != i ? 'page-item' : 'page-item active'}"
+						th:each="i : ${#numbers.sequence(1, totalPaginas)}"><a
+						class="page-link" th:href="@{'/usuarios/pagina/' +${i}}">[[${i}]]</a>
+					</li>
+					<li
+						th:class="${paginaAtual < totalPaginas ? 'page-item':'page-item disabled'}"><a
+						class="page-link"
+						th:href="@{'/usuarios/pagina/'+${paginaAtual +1 }}"
+						aria-label="Proxima"> <span aria-hidden="true">&gt;</span>
+					</a></li>
+					<li
+						th:class="${paginaAtual < totalPaginas ? 'page-item':'page-item disabled'}"><a
+						class="page-link" th:href="@{'/usuarios/pagina/'+${totalPaginas}}"
+						aria-label="Ultima"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="modal fade text-center" id="confirmModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="modalTitle">Atenção</h4>
+						<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<span id="modalBody"></span>
+					</div>
+					<div class="modal-footer">
+						<a class="btn btn-success" id="yesButton" href="">Sim</a>
+						<button type="button" class="btn btn-danger"
+							data-bs-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					$(".link-delete")
+							.on(
+									"click",
+									function(e) {
+										e.preventDefault();
+										link = $(this);
+										userId = link.attr("userId");
+										$("#yesButton").attr("href",
+												link.attr("href"));
+										$("#modalBody").text(
+												"Confirmar exclusão do usuário "
+														+ userId + "?");
+										$("#confirmModal").modal("show");
+
+									});
+				});
+	</script>
 </body>
 </html>
